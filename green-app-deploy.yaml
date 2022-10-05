@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: green-app
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: green-app
+  template:
+    metadata:
+      labels:
+        app: green-app
+    spec:
+      containers:
+      - image: hashicorp/http-echo   
+        name: container-green
+        args:
+        - "-listen=:8081"
+        - "-text='I am green'"
+
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: green-app
+spec:
+  selector:
+    app: green-app
+  ports:
+  - name: green-app-svc
+    targetPort: 8081
+    port: 8080
+    protocol: TCP
+  type: NodePort
