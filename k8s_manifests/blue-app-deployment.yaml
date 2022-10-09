@@ -29,8 +29,8 @@ spec:
   selector:
     app: blue-app
   ports:
-  - name: blue-app-svc
+  - name: blue-app
     targetPort: 8080
     port: 8080
     protocol: TCP
-  type: NodePort
+  # type: NodePort
