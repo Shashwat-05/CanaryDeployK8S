@@ -20,8 +20,8 @@ then,
     externalIPs:
     - <minikube_ip>
 ```
-    reason - as this svc is loadbalancer type and there won't be any externalIP  
-    in a local minikube, therefore providing one manually.
+**reason** - as this svc is loadbalancer type and there won't be any externalIP  
+in a local minikube, therefore providing one manually.
 
 3. Deploy both blue-app & green-app with their services.    
     `kubectl apply -f blue-app-deployment.yaml -f green-app-deploy.yaml`
