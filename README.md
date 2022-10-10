@@ -15,7 +15,11 @@
     # helm install nginx-ingress nginx-stable/nginx-ingress
 ````   
 then,   
-    `kubectl edit svc/nginx-ingress-svc` - add this below clusterIPs block  
+    `kubectl edit svc/nginx-ingress-svc` - add this below clusterIPs block 
+```
+    externalIPs:
+    - <minikube_ip>
+```
     reason - as this svc is loadbalancer type and there won't be any externalIP  
     in a local minikube, therefore providing one manually.
 
@@ -41,7 +45,7 @@ Note - *if requirement is to split traffic btw more than 2 apps* - use nginx Vir
 **terraform steps to follow**
 1. `terraform init`
 
-2. `terraform apply` - install helm chart separately first, (either comment out all other resource files adn run apply twice)    
+2. `terraform apply` - install helm chart separately first, (either comment out all other resource files and run apply twice, (i) after commenting, (ii) after uncommenting)    
 as nginx-ingress-controller chart needs to be deployed first else tf will throw erros as virtualserver CRD wont be existing.  
 this will do
 - deploy all three apps from app.json
