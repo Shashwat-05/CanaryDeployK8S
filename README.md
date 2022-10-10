@@ -9,11 +9,11 @@
     nginx ingress controller can be installed from helm or manifests itself with some modifications required.
 
 **Alternative step - install nginx-ig-controller with helm**  
-    ````
+````
     # helm repo add nginx-stable https://helm.nginx.com/stable   
     # helm repo update  
     # helm install nginx-ingress nginx-stable/nginx-ingress
-    ````   
+````   
     then,   
     `kubectl edit svc/nginx-ingress-svc` - add this below clusterIPs block  
     ```
