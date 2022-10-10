@@ -1,0 +1,23 @@
+apiVersion: k8s.nginx.org/v1
+kind: VirtualServer
+metadata:
+  name: traffic-lb-vserver
+spec:
+  host: app.facets.com
+  upstreams:
+  - name: blue-app
+    service: blue-app
+    port: 8080
+  - name: green-app
+    service: green-app
+    port: 8080
+
+  routes:
+  - path: /
+    splits:
+    - weight: 75
+      action:
+        pass: blue-app
+    - weight: 25
+      action:
+        pass: green-app

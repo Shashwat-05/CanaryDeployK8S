@@ -4,10 +4,11 @@ metadata:
   name: normal-ingress
   namespace: default
   annotations:
+    nginx.ingress.kubernetes.io/ssl-redirect: "false"
     kubernetes.io/ingress.class: nginx 
 spec:
   rules:
-    - host: facets.app
+    - host: app.facets.com
       http:
         paths:
           - path: '/'
@@ -25,12 +26,13 @@ metadata:
   name: canary-ingress
   namespace: default
   annotations:
+    nginx.ingress.kubernetes.io/ssl-redirect: "false"
     kubernetes.io/ingress.class: nginx
     nginx.ingress.kubernetes.io/canary: "true"
     nginx.ingress.kubernetes.io/canary-weight: "25" 
 spec:
   rules:
-    - host: facets.app
+    - host: app.facets.com
       http:
         paths:
           - path: /
@@ -40,4 +42,35 @@ spec:
                 name: green-app   
                 port: 
                   number: 8080   
+
+# apiVersion: networking.k8s.io/v1
+# kind: Ingress
+# metadata:
+#   name: gray-release
+#   annotations:
+#       kubernetes.io/ingress.class: nginx
+#       # 50% of requests are forwarded to the new-nginx Service. 
+#       nginx.ingress.kubernetes.io/service-weight: |
+#           blue-app: 50, green-app: 50
+# spec:
+#   rules:
+#   - host: facets.app
+#     http:
+#       paths:
+#       # Information about the Service that is created for the earlier application version. 
+#       - path: /
+#         backend:
+#           service: 
+#             name: blue-app
+#             port:
+#               number: 8080
+#         pathType: ImplementationSpecific
+#       # Information about the Service that is created for the new application version. 
+#       - path: /
+#         backend:
+#           service: 
+#             name: green-app
+#             port:
+#               number: 8080
+#         pathType: ImplementationSpecific
 
