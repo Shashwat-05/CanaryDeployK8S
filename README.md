@@ -14,12 +14,8 @@
     # helm repo update  
     # helm install nginx-ingress nginx-stable/nginx-ingress
 ````   
-    then,   
+then,   
     `kubectl edit svc/nginx-ingress-svc` - add this below clusterIPs block  
-    ```
-    externalIPs:
-    - minikube_ip
-    ```   
     reason - as this svc is loadbalancer type and there won't be any externalIP  
     in a local minikube, therefore providing one manually.
 
