@@ -54,3 +54,4 @@ this will do
 - create ingress-controller,crds,etc with helm.
 
 (provide the minikube_ip manually as external ip to the ingress-controller service)
+
